@@ -175,15 +175,15 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Meteor.cpp" />
+    <ClCompile Include="src\Planet.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
-    <ClCompile Include="src\Planeta.cpp" />
-    <ClCompile Include="src\Sol.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Meteor.h" />
+    <ClInclude Include="src\Planet.h" />
     <ClInclude Include="src\ofApp.h" />
-    <ClInclude Include="src\Planeta.h" />
-    <ClInclude Include="src\Sol.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">

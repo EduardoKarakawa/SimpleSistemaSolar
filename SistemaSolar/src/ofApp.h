@@ -1,8 +1,12 @@
 #pragma once
 
+#include <vector>
+#include <time.h>
 #include "ofMain.h"
-#include "Sol.h"
-#include "Planeta.h"
+#include "Planet.h"
+#include "Meteor.h"
+
+#define TIME_SPAWN_METEOR 1.5f
 
 class ofApp : public ofBaseApp{
 
@@ -22,7 +26,14 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+		
+		enum Planets {
+			Sun,
+			Earth,
+			Moon
+		};
 
-		Sol sol;
-		Planeta terra, lua;		
+		float contTime;
+		std::vector<Planet> SolarSystem; 
+		std::vector<Meteor> Meteors;
 };

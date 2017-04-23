@@ -7,8 +7,12 @@
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Sol.cpp" />
-    <ClCompile Include="src\Planeta.cpp" />
+    <ClCompile Include="src\Planet.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Meteor.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -22,8 +26,12 @@
     <ClInclude Include="src\ofApp.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Sol.h" />
-    <ClInclude Include="src\Planeta.h" />
+    <ClInclude Include="src\Planet.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Meteor.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

@@ -2,28 +2,58 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-	sol.Setup(ofVec2f(ofGetWidth() / 2.0f, ofGetHeight() / 2.0f), 80.0f, 40.0f);
-	terra.Setup(ofVec2f(ofGetWidth() / 2.0f, ofGetHeight() / 2.0f - 200.0f), 30.0f, 10.0f, 360 /5, sol.GetPosition());
-	lua.Setup(ofVec2f(terra.GetPosition().x, terra.GetPosition().y - 50), 30.0f, 15.0f, 360, terra.GetPosition());
+	srand(time(NULL));
+
+	//								positionCeter,								distance, radiusAtraction, velocity, mass,size
+	SolarSystem.push_back(Planet(ofVec2f(ofGetWidth() / 2.0f, ofGetHeight() / 2.0f),   0,	250,				0,	2000, 80));
+	SolarSystem.push_back(Planet(SolarSystem[Sun].GetPosition(),					 250,	210,	  360 / 15.0f,	200, 20));
+	SolarSystem.push_back(Planet(SolarSystem[Earth].GetPosition(),					  75,	100,	360.0f / 3.5f,	50,  8));
+	contTime = 0;
+
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	terra.Update(sol.GetPosition(), sol.GetMass(), ofGetLastFrameTime());
-	lua.Update(terra.GetPosition(), terra.GetMass(), ofGetLastFrameTime());
+	float deltaTime = ofGetLastFrameTime();
+	SolarSystem[Sun].	Update(SolarSystem[Sun].GetPosition(),	 deltaTime);
+	SolarSystem[Earth].	Update(SolarSystem[Sun].GetPosition(),	 deltaTime);
+	SolarSystem[Moon].	Update(SolarSystem[Earth].GetPosition(), deltaTime);
+	
+	contTime += deltaTime;
+	if (contTime >= TIME_SPAWN_METEOR) {
+		contTime -= TIME_SPAWN_METEOR;
+		Meteors.push_back(Meteor());
+	}
+
+
+	// Percorre os meteros atualizando os que estao na tela e exclui os que nao estao
+	for (int i = 0; i < Meteors.size(); i++) {
+		if (Meteors[i].OnScreen() && !Meteors[i].Collided()) {
+			Meteors[i].Update(SolarSystem, deltaTime);
+		}
+		else {
+			Meteors.erase(Meteors.begin() + i);
+		}
+	}
+
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	ofSetBackgroundColor(4, 5, 15);
-	sol.Draw();
-	terra.Draw(ofColor(0, 120, 255));
-	lua.Draw(ofColor(0, 255, 255));
+	ofSetColor(255, 255, 255);
+	for (Planet i : SolarSystem) {
+		i.Draw();
+	}
+
+	ofSetColor(115, 50, 50);
+	for (Meteor i : Meteors) {
+		i.Draw();
+	}
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+	Meteors.push_back(Meteor());
 }
 
 //--------------------------------------------------------------
