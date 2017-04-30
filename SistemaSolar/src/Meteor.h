@@ -19,8 +19,6 @@ private:
 	bool m_collided;
 public:
 	Meteor();
-
-	void Setup();
 	void Update(const std::vector<Planet> &planets, const float &deltatime);
 	void Draw();
 	bool OnScreen();

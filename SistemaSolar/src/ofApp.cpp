@@ -4,10 +4,11 @@
 void ofApp::setup(){
 	srand(time(NULL));
 
-	//								positionCeter,								distance, radiusAtraction, velocity, mass,size
-	SolarSystem.push_back(Planet(ofVec2f(ofGetWidth() / 2.0f, ofGetHeight() / 2.0f),   0,	250,				0,	2000, 80));
-	SolarSystem.push_back(Planet(SolarSystem[Sun].GetPosition(),					 250,	210,	  360 / 15.0f,	200, 20));
-	SolarSystem.push_back(Planet(SolarSystem[Earth].GetPosition(),					  75,	100,	360.0f / 3.5f,	50,  8));
+	ofVec2f sunPos = ofVec2f(ofGetWidth() / 2.0f, ofGetHeight() / 2.0f);
+	//															,distance, radiusAtraction, velocity, mass,size
+	SolarSystem.push_back(Planet(sunPos,							0,   350,  0,			   1989, 80, ofColor(255, 157, 0)));
+	SolarSystem.push_back(Planet(SolarSystem[Sun].GetPosition(),	350,  85,  360 / 15.0f,	   200,  20, ofColor(0, 135, 255)));
+	SolarSystem.push_back(Planet(SolarSystem[Earth].GetPosition(),	85,   30,  360.0f / 3.5f,  50,    8,  ofColor(149, 152, 153)));
 	contTime = 0;
 
 }
@@ -40,6 +41,7 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+	ofSetBackgroundColor(10, 10, 15);
 	ofSetColor(255, 255, 255);
 	for (Planet i : SolarSystem) {
 		i.Draw();

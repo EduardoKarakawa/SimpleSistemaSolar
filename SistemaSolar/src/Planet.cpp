@@ -15,19 +15,9 @@ Planet::Planet() {
 }
 
 
-Planet::Planet(const ofVec2f &center, float distance, float radiusAtraction, float velocity, float mass, float size) {
+Planet::Planet(const ofVec2f &center, float distance, float radiusAtraction, float velocity, float mass, float size, ofColor color) {
+	m_color = color;
 	m_position.set(center + ofVec2f(1,0) * distance);
-	m_distance = distance;
-	m_mass = mass;
-	m_radiusAtraction = radiusAtraction;
-	m_velocity = velocity;
-	m_size = size;
-	m_angle = 0;
-}
-
-
-void Planet::Setup(const ofVec2f &center, float distance, float radiusAtraction, float velocity, float mass, float size) {
-	m_position.set(center + ofVec2f(1, 0) * distance);
 	m_distance = distance;
 	m_mass = mass;
 	m_radiusAtraction = radiusAtraction;
@@ -45,9 +35,9 @@ void Planet::Update(const ofVec2f &center, float &deltaTime) {
 
 
 void Planet::Draw() {
-	ofSetColor(0, 0, 175, 20);
+	ofSetColor(m_color.r, m_color.g, m_color.g, 20);
 	ofDrawCircle(m_position, m_radiusAtraction);
-	ofSetColor(255, 255, 255);
+	ofSetColor(m_color);
 	ofDrawCircle(m_position, m_size);
 
 }
